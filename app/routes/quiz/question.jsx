@@ -1,5 +1,5 @@
 import { json, redirect } from "@remix-run/node";
-import { Form, useActionData } from "@remix-run/react";
+import { Form, useActionData, useTransition } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 
 export function meta() {
@@ -23,6 +23,7 @@ export const action = async ({ request }) => {
 
 export default function Questions() {
   let actionMessage = useActionData();
+  let transition = useTransition();
   let answerRef = useRef(null);
   
   useEffect(() => {
@@ -44,7 +45,11 @@ export default function Questions() {
           <input ref={answerRef} name="answer" type="text" />
         </label>
         <div>
-          <button>Submit</button>
+          <button type="submit">
+            {transition.state === "submitting"
+              ? "Submitting..."
+              : "Sumbit"}
+          </button>
         </div>
         {actionMessage ? (
           <p>
