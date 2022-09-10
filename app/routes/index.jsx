@@ -1,32 +1,62 @@
-export default function Index() {
+import { json, redirect } from "@remix-run/node";
+import { Form, useActionData } from "@remix-run/react";
+import { useEffect, useRef } from "react";
+
+export function meta() {
+  return { title: "Actions Demo" };
+}
+
+export const action = async ({ request }) => {
+  let formData = await request.formData();
+  let answer = formData.get("answer");
+  
+  if (typeof answer !== "string") {
+    return json("Come on, at least try!", { status: 400 });
+  }
+  
+  if (answer !== "egg") {
+    return json(`Sorry, ${answer} is not right.`, { status: 400 });
+  }
+  
+  if (answer === "egg") {
+    return json(`Nice one!, ${answer} is correct!`, { status: 400 });
+  }
+  
+  return redirect("/");
+}
+
+export default function Questions() {
+  let actionMessage = useActionData();
+  let answerRef = useRef(null);
+  
+  useEffect(() => {
+    if (actionMessage && answerRef.current) {
+      answerRef.current.select();
+    }
+  }, [actionMessage]);
+  
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+      <h1>Question time</h1>
+      
+      <Form method="post">
+        <p>
+          <i>What is more useful when it is broken?</i>
+        </p>
+        <label>
+          <div>Answer:</div>
+          <input ref={answerRef} name="answer" type="text" />
+        </label>
+        <div>
+          <button>Submit</button>
+        </div>
+        {actionMessage ? (
+          <p>
+            <b>{actionMessage}</b>
+          </p>
+        ) : null}
+      </Form>
+      
     </div>
   );
 }
