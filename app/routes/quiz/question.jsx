@@ -15,7 +15,7 @@ export const action = async ({ request }) => {
   }
   
   if (answer !== "egg") {
-    return json(`Sorry, ${answer} is not right.`, { status: 400 });
+    return json(`Sorry, "${answer}" is not right.`, { status: 400 });
   }
   
   return redirect("/quiz/correct");

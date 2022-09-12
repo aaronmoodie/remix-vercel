@@ -4,7 +4,12 @@ export default function Index() {
 	return (
 		<div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
 			<h1>Hi there!</h1>
-			<Link to="/quiz/question">You should click here!</Link>
+			<p>
+				<Link to="/quiz/question">Take the quiz</Link>
+			</p>
+			<p>
+				<Link to="/posts">Read the some posts</Link>
+			</p>
 		</div>
 	);
 }
