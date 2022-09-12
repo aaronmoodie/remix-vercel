@@ -14,10 +14,9 @@ export default function Posts() {
 	const data = useLoaderData();
 	return (
 		<div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
+			<p><Link to="/">Back home</Link></p>
 			<h1>Posts</h1>
-			<Link to="/">Back home</Link>
-			<Link to="/posts/new">Create new post</Link>
-			
+			<p><Link to="/posts/new">Create new post</Link></p>						
 			<ul>
 				{data.posts.map((post) => (
 					<li key={post.id}>

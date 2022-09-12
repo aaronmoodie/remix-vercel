@@ -1,5 +1,5 @@
 import { json, redirect } from "@remix-run/node";
-import { Form, useActionData, useTransition } from "@remix-run/react";
+import { Link, Form, useActionData, useTransition } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 
 export function meta() {
@@ -34,6 +34,7 @@ export default function Questions() {
   
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
+      <p><Link to="/">Back home</Link></p>
       <h1>Question time</h1>
       
       <Form method="post">

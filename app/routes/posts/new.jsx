@@ -1,5 +1,5 @@
 import { json, redirect } from "@remix-run/node";
-import { Form, useActionData, useTransition } from "@remix-run/react";
+import { Link, Form, useActionData, useTransition } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 
 import { db } from "~/utils/db.server";
@@ -37,8 +37,9 @@ export default function NewPost() {
 	
 	return (
 		<div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
+			<p><Link to="/posts">Back to all posts</Link></p>
 			<h1>New post</h1>
-			
+		
 			<Form method="post">
 				<label style={{ display: "block", marginBottom: "1rem" }}>
 					<div>Title</div>
