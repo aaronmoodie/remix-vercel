@@ -15,6 +15,7 @@ export default function PostId() {
 	return (
 		<main style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
 			<Link to="/posts">Back to all posts</Link>
+			
 			<h1>
 				{post.title}
 			</h1>
