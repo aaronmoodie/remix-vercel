@@ -1,11 +1,16 @@
-import { Link, useLoaderData } from "@remix-run/react";
 import { json } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
 
 import { db } from "~/utils/db.server";
 
 export const loader = async () => {
 	const data = {
-		posts: await db.post.findMany(),
+		posts: await db.post.findMany({
+			select: {
+				id: true,
+				title: true,
+			},
+		}),
 	};
 	return json(data);
 };
